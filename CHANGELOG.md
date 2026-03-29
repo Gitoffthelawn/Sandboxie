@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.17.3 / 5.72.3] - 2026-03-??
+## [1.17.3 / 5.72.3] - 2026-03-29
 
 ### Added
 - added configurable window location settings to control which monitor main, non-main, file recovery, and notification windows open on, including a selectable fallback mode. [#4536](https://github.com/sandboxie-plus/Sandboxie/issues/4536) [#5238](https://github.com/sandboxie-plus/Sandboxie/pull/5238)
@@ -20,6 +20,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
 - added border label width and taskbar clipping options
   - configurable via `BorderColor` label width and `BorderExcludeTaskbar`
+- added `UseFakeShellDispatch` option to provide synthetic `IShellDispatch` fallback (may fix some WebView2 issues)
+  - can be disabled per process via `UseFakeShellDispatch=process,n`
+- added `Template_OnScreenKeyboard` (Windows 11) to fix On-Screen Keyboard freezes when used with sandboxed programs
 
 ### Changed
 - reduced constant GUI CPU usage by caching custom `BoxIcon` resolution in the sandbox model instead of reloading icon resources on refresh
@@ -46,6 +49,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed an issue with RunSbieCtrl (reported by Yanchon918s)
 - fixed name validation in ProcessServer handlers (reported by Yanchon918s)
 - fixed parameter validation in NamedPipeServer (reported by Yanchon918s)
+- fixed file integrity issues with updater (reported by sammy12342)
 
 
 ## [1.17.2 / 5.72.2] - 2026-02-18
