@@ -89,6 +89,8 @@ jobs:
   Build_x64_Qt6:
     runs-on: windows-2022
     timeout-minutes: 45
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code
@@ -204,6 +206,8 @@ jobs:
   Build_ARM64_Qt6:
     runs-on: windows-2022
     timeout-minutes: 45
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code

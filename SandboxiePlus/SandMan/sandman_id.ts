@@ -7805,7 +7805,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <location filename="Views/TraceView.cpp" line="288"/>
         <location filename="Views/TraceView.cpp" line="297"/>
         <location filename="Views/TraceView.cpp" line="571"/>
-        <location filename="Views/TraceView.cpp" line="687"/>
+        <location filename="Views/TraceView.cpp" line="693"/>
         <source>[All]</source>
         <translation>[Semua]</translation>
     </message>
@@ -7875,22 +7875,22 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <translation>Untuk menggunakan fitur jejak tumpukan, DbgHelp.dll dan SymSrv.dll diperlukan, apakah Anda ingin mengunduh dan menginstalnya?</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="730"/>
+        <location filename="Views/TraceView.cpp" line="736"/>
         <source>Save trace log to file</source>
         <translation>Simpan log jejak ke file</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="736"/>
+        <location filename="Views/TraceView.cpp" line="742"/>
         <source>Failed to open log file for writing</source>
         <translation>Gagal membuka file log untuk penulisan</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="756"/>
+        <location filename="Views/TraceView.cpp" line="762"/>
         <source>Saving TraceLog...</source>
         <translation>Menyimpan TraceLog...</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="640"/>
+        <location filename="Views/TraceView.cpp" line="646"/>
         <source>%1 (%2)</source>
         <translation></translation>
     </message>
@@ -7900,7 +7900,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="653"/>
+        <location filename="Views/TraceView.cpp" line="659"/>
         <source>%1</source>
         <translation></translation>
     </message>
@@ -7908,7 +7908,7 @@ Jika Anda sudah menjadi Great Supporter di Patreon, Sandboxie dapat memeriksa se
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="824"/>
+        <location filename="Views/TraceView.cpp" line="830"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Pemantau Jejak</translation>
     </message>
