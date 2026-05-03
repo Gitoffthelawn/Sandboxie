@@ -8313,7 +8313,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Views/TraceView.cpp" line="288"/>
         <location filename="Views/TraceView.cpp" line="297"/>
         <location filename="Views/TraceView.cpp" line="571"/>
-        <location filename="Views/TraceView.cpp" line="687"/>
+        <location filename="Views/TraceView.cpp" line="693"/>
         <source>[All]</source>
         <translation>[所有]</translation>
     </message>
@@ -8383,17 +8383,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>為使用堆疊追蹤功能，DbgHelp.dll 和 SymSrv.dll 是必需的，是否進行下載和安裝？</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="730"/>
+        <location filename="Views/TraceView.cpp" line="736"/>
         <source>Save trace log to file</source>
         <translation>儲存追蹤日誌至檔案</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="736"/>
+        <location filename="Views/TraceView.cpp" line="742"/>
         <source>Failed to open log file for writing</source>
         <translation>無法開啟日誌檔進行寫入</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="756"/>
+        <location filename="Views/TraceView.cpp" line="762"/>
         <source>Saving TraceLog...</source>
         <translation>正在儲存追蹤日誌...</translation>
     </message>
@@ -8402,7 +8402,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">未知</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="640"/>
+        <location filename="Views/TraceView.cpp" line="646"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -8412,7 +8412,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>監視模式</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="653"/>
+        <location filename="Views/TraceView.cpp" line="659"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -8420,7 +8420,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="824"/>
+        <location filename="Views/TraceView.cpp" line="830"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - 追蹤監測</translation>
     </message>
