@@ -5,6 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.17.6 / 5.72.6] - 2026-05-??
+
+### Fixed
+- fixed issue with hook registration
+- fixed high CPU usage caused by DWM with applications using custom titlebars (e.g., Delphi VCL)
+
+
 
 
 ## [1.17.5 / 5.72.5] - 2026-05-02
@@ -53,10 +60,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "Label only" border mode option (`onlbl`, `ttllbl`, `alllbl`) that hides the colored border frame and shows only the sandbox name (or alias) label [#5239](https://github.com/sandboxie-plus/Sandboxie/pull/5239)
 - added MIDI workaround template for Windows 11 [#5183](https://github.com/sandboxie-plus/Sandboxie/issues/5183) [#5203](https://github.com/sandboxie-plus/Sandboxie/issues/5203#issuecomment-3938495163) (thanks xsmolasses)
 - added new tray customization options (Global Settings > Shell Integration > System Tray): [#5254](https://github.com/sandboxie-plus/Sandboxie/pull/5254)
-  - "Show icons in tray context menu" (`Options/TrayIcons`) — controls whether custom sandbox icons are displayed in the tray menu.
-  - "Show box alias name instead of box name in tray" (`Options/TrayUseAlias`) — displays the configured alias/display name in both compact and regular tray menus.
+  - "Show icons in tray context menu" (`Options/TrayIcons`) - controls whether custom sandbox icons are displayed in the tray menu.
+  - "Show box alias name instead of box name in tray" (`Options/TrayUseAlias`) - displays the configured alias/display name in both compact and regular tray menus.
   - "Show sandbox status as tooltip in tray list" (`Options/TrayStatusTip`) now supports tri-state behavior: unchecked = never, partial = while Ctrl or Shift is held (default), checked = always.
-  - "Show overlay icons for boxes in tray list" (`Options/TrayOverlayIcons`) — shows the same box-state overlays used in the main sandbox list (no-force, disk image mounted/unmounted, RAM disk, auto-delete) on tray icons in both the compact widget and the regular context menu.
+  - "Show overlay icons for boxes in tray list" (`Options/TrayOverlayIcons`) - shows the same box-state overlays used in the main sandbox list (no-force, disk image mounted/unmounted, RAM disk, auto-delete) on tray icons in both the compact widget and the regular context menu.
 - added border capture exclusion via `HideBordersFromCapture`
   - keeps border frames and labels out of screenshots and screen recordings; defaults to `CoverBoxedWindows`
 - added border label width and taskbar clipping options

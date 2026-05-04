@@ -3773,6 +3773,9 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 
 ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
 {
+    typedef DWORD (*P_GetProcessIdOfThread)(HANDLE Thread);
+    static P_GetProcessIdOfThread pGetProcessIdOfThread = (P_GetProcessIdOfThread)GetProcAddress(_Kernel32, "GetProcessIdOfThread");
+
     GUI_WND_HOOK_REGISTER_REQ* req = (GUI_WND_HOOK_REGISTER_REQ*)args->req_buf;
     GUI_WND_HOOK_REGISTER_RPL* rpl = (GUI_WND_HOOK_REGISTER_RPL*)args->rpl_buf;
 
@@ -3792,6 +3795,15 @@ ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
     
     if (req->hthread && req->hproc) // register
     {
+        // Validate thread ownership - reject if hthread is not in the caller's process
+        HANDLE hThread = OpenThread(THREAD_QUERY_LIMITED_INFORMATION, FALSE, req->hthread);
+        if (!hThread) 
+            return STATUS_UNSUCCESSFUL;
+        DWORD ownerPid = pGetProcessIdOfThread ? pGetProcessIdOfThread(hThread) : -1;
+        CloseHandle(hThread);
+        if (ownerPid != args->pid)
+            return STATUS_ACCESS_DENIED;
+
         if (!whk) // add if not already added
         {
             whk = (WND_HOOK *)HeapAlloc(GetProcessHeap(), 0, sizeof(WND_HOOK));
