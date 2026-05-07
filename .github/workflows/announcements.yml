@@ -1,22 +1,8 @@
-name: Lock announcements
+name: Lock previous announcement(s)
 
 on:
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      category_name:
-        description: Discussion category name for release announcements
-        required: false
-        default: Announcements
-      release_tag:
-        description: Optional release tag to keep unlocked; if empty, the latest published release tag is used
-        required: false
-        default: ""
-      max_to_lock:
-        description: Maximum number of old release announcements to lock per run
-        required: false
-        default: "20"
 
 jobs:
   lock-announcements:
@@ -26,13 +12,13 @@ jobs:
       discussions: write
 
     steps:
-      - name: Lock announcements
+      - name: Lock previous announcement(s)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          CATEGORY_NAME: ${{ inputs.category_name || 'Announcements' }}
-          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag || '' }}
-          MAX_TO_LOCK: ${{ inputs.max_to_lock || '20' }}
+          CATEGORY_NAME: Announcements
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          MAX_TO_LOCK: "20"
         shell: bash
         run: |
           set -euo pipefail
@@ -42,15 +28,8 @@ jobs:
 
           release_tag="${RELEASE_TAG}"
 
-          if [[ -z "${release_tag}" ]]; then
-            echo "No release tag provided by event or manual input. Resolving latest published release tag..."
-            release_tag="$(
-              gh api "/repos/${owner}/${repo}/releases/latest" --jq '.tag_name'
-            )"
-          fi
-
           if [[ -z "${release_tag}" || "${release_tag}" == "null" ]]; then
-            echo "No release tag was provided and no latest release tag could be resolved." >&2
+            echo "Release event did not provide a tag name." >&2
             exit 1
           fi
 
@@ -118,8 +97,8 @@ jobs:
           EOF
 
           read -r -d '' LOCK_MUTATION <<'EOF' || true
-          mutation($id: ID!, $reason: LockReason) {
-            lockLockable(input: { lockableId: $id, lockReason: $reason }) {
+          mutation($id: ID!) {
+            lockLockable(input: { lockableId: $id }) {
               lockedRecord {
                 __typename
               }
@@ -158,10 +137,9 @@ jobs:
             )"
 
             discussions_json="$(
-              jq -c \
-                --argjson existing "$discussions_json" \
-                --argjson page "$page_matches" \
-                '$existing + $page'
+              jq -sc 'add' \
+                <(printf '%s\n' "$discussions_json") \
+                <(printf '%s\n' "$page_matches")
             )"
 
             has_next="$(jq -r '.data.repository.discussions.pageInfo.hasNextPage' <<<"$response")"
@@ -201,7 +179,7 @@ jobs:
             jq -c --arg tag "$release_tag" '
               [
                 .[]
-                | select(.title | contains($tag))
+                | select(.title | test("(^|[^0-9A-Za-z])" + ($tag | gsub("([][(){}.^$*+?|\\\\-])"; "\\\\\\1")) + "([^0-9A-Za-z]|$)"; "i"))
               ]
               | sort_by(.createdAt)
               | reverse
@@ -240,12 +218,13 @@ jobs:
             jq -c --arg keep_id "$keep_id" --arg max_to_lock "$MAX_TO_LOCK" '
               ($max_to_lock | tonumber) as $limit
               | sort_by(.createdAt)
+              | map(select(.id != $keep_id and .locked == false))
+              | .[0:$limit]
               | .[]
-              | select(.id != $keep_id)
-              | select(.locked == false)
-              | limit($limit; .)
             ' <<<"$release_like_discussions"
           )
+
+          echo "Selected ${#to_lock[@]} discussion(s) to lock in this run."
 
           if [[ "${#to_lock[@]}" -eq 0 ]]; then
             echo "No previous release announcements need locking."
@@ -266,7 +245,6 @@ jobs:
 
             gh api graphql \
               -f id="$id" \
-              -f reason="RESOLVED" \
               -f query="$LOCK_MUTATION" \
               >/dev/null
 
